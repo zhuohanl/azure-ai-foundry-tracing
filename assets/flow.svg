@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="100%" height="100%">
+  <!-- Styles -->
+  <defs>
+    <linearGradient id="swimlane1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f0f7ff" />
+      <stop offset="100%" stop-color="#e6f0ff" />
+    </linearGradient>
+    <linearGradient id="swimlane2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f0fff0" />
+      <stop offset="100%" stop-color="#e6ffe6" />
+    </linearGradient>
+    <linearGradient id="swimlane3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fff0f0" />
+      <stop offset="100%" stop-color="#ffe6e6" />
+    </linearGradient>
+    <linearGradient id="swimlane4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f7f0ff" />
+      <stop offset="100%" stop-color="#f0e6ff" />
+    </linearGradient>
+    <filter id="shadow" x="-0.5" y="-0.5" width="200%" height="200%">
+      <feOffset result="offOut" in="SourceAlpha" dx="2" dy="2" />
+      <feGaussianBlur result="blurOut" in="offOut" stdDeviation="2" />
+      <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+    </filter>
+  </defs>
+
+  <!-- Title area -->
+  <rect x="0" y="0" width="1200" height="60" fill="#2a3f5f" />
+  <text x="600" y="35" font-family="Arial" font-size="24" fill="white" text-anchor="middle" font-weight="bold">
+    Azure AI Foundry Tracing Flow
+  </text>
+
+  <!-- Swimlanes -->
+  <g>
+    <!-- Swimlane headers -->
+    <rect x="0" y="60" width="200" height="640" fill="#3a506b" />
+    <text x="100" y="100" font-family="Arial" font-size="18" fill="white" text-anchor="middle" font-weight="bold">Actors</text>
+    
+    <!-- Swimlane 1: User Code (run.py) -->
+    <rect x="200" y="60" width="1000" height="160" fill="url(#swimlane1)" />
+    <text x="240" y="100" font-family="Arial" font-size="16" fill="#2a3f5f" font-weight="bold">User Code (run.py)</text>
+    
+    <!-- Swimlane 2: Configuration (config.py) -->
+    <rect x="200" y="220" width="1000" height="160" fill="url(#swimlane2)" />
+    <text x="240" y="260" font-family="Arial" font-size="16" fill="#2a3f5f" font-weight="bold">Configuration (config.py)</text>
+    
+    <!-- Swimlane 3: OpenTelemetry & Instrumentation -->
+    <rect x="200" y="380" width="1000" height="160" fill="url(#swimlane3)" />
+    <text x="240" y="420" font-family="Arial" font-size="16" fill="#2a3f5f" font-weight="bold">Instrumentation Layer</text>
+    
+    <!-- Swimlane 4: Azure Monitor -->
+    <rect x="200" y="540" width="1000" height="160" fill="url(#swimlane4)" />
+    <text x="240" y="580" font-family="Arial" font-size="16" fill="#2a3f5f" font-weight="bold">Azure Monitor</text>
+  </g>
+
+  <!-- Shapes -->
+  <!-- Swimlane 1: User Code -->
+  <rect id="load_dotenv" x="260" y="130" width="120" height="50" rx="5" ry="5" fill="#b3d1ff" stroke="#3a506b" stroke-width="2" filter="url(#shadow)" />
+  <text x="320" y="160" font-family="Arial" font-size="12" fill="#2a3f5f" text-anchor="middle">load_dotenv()</text>
+  <!-- connection-points
+    right: 380,155
+  -->
+
+  <rect id="enable_telemetry" x="480" y="130" width="120" height="50" rx="5" ry="5" fill="#b3d1ff" stroke="#3a506b" stroke-width="2" filter="url(#shadow)" />
+  <text x="540" y="152" font-family="Arial" font-size="12" fill="#2a3f5f" text-anchor="middle">enable_telemetry</text>
+  <text x="540" y="168" font-family="Arial" font-size="12" fill="#2a3f5f" text-anchor="middle">(True)</text>
+  <!-- connection-points
+    left: 480,155
+    bottom: 540,180
+  -->
+
+  <rect id="sdk_calls" x="800" y="130" width="120" height="50" rx="5" ry="5" fill="#80b3ff" stroke="#3a506b" stroke-width="2" filter="url(#shadow)" />
+  <text x="860" y="152" font-family="Arial" font-size="12" fill="#2a3f5f" text-anchor="middle">SDK Calls</text>
+  <text x="860" y="168" font-family="Arial" font-size="12" fill="#2a3f5f" text-anchor="middle">chat_with_llm()</text>
+  <!-- connection-points
+    left: 800,155
+    bottom: 860,180
+  -->
+
+  <!-- Swimlane 2: Configuration -->
+  <rect id="instrumentor" x="260" y="300" width="160" height="50" rx="5" ry="5" fill="#b3ffb3" stroke="#2a5f2a" stroke-width="2" filter="url(#shadow)" />
+  <text x="340" y="322" font-family="Arial" font-size="12" fill="#2a5f2a" text-anchor="middle">AIInferenceInstrumentor()</text>
+  <text x="340" y="338" font-family="Arial" font-size="12" fill="#2a5f2a" text-anchor="middle">.instrument()</text>
+  <!-- connection-points
+    top: 340,300
+    right: 420,325
+  -->
+
+  <rect id="env_var" x="460" y="300" width="200" height="50" rx="5" ry="5" fill="#b3ffb3" stroke="#2a5f2a" stroke-width="2" filter="url(#shadow)" />
+  <text x="560" y="325" font-family="Arial" font-size="11" fill="#2a5f2a" text-anchor="middle">Set AZURE_TRACING_GEN_AI_</text>
+  <text x="560" y="340" font-family="Arial" font-size="11" fill="#2a5f2a" text-anchor="middle">CONTENT_RECORDING_ENABLED</text>
+  <!-- connection-points
+    left: 460,325
+    bottom: 560,350
+  -->
+
+  <path id="decision" d="M760,300 L810,325 L760,350 L710,325 Z" fill="#99ff99" stroke="#2a5f2a" stroke-width="2" filter="url(#shadow)" />
+  <text x="760" y="330" font-family="Arial" font-size="12" fill="#2a5f2a" text-anchor="middle">App Insights?</text>
+  <!-- connection-points
+    left: 710,325
+    right: 810,325
+    bottom: 760,350
+  -->
+
+  <rect id="configure_monitor" x="940" y="300" width="180" height="50" rx="5" ry="5" fill="#80ff80" stroke="#2a5f2a" stroke-width="2" filter="url(#shadow)" />
+  <text x="1030" y="322" font-family="Arial" font-size="12" fill="#2a5f2a" text-anchor="middle">configure_azure_monitor</text>
+  <text x="1030" y="338" font-family="Arial" font-size="12" fill="#2a5f2a" text-anchor="middle">(connection_string)</text>
+  <!-- connection-points
+    left: 940,325
+    bottom: 1030,350
+  -->
+
+  <!-- Swimlane 3: OpenTelemetry & Instrumentation -->
+  <rect id="patches" x="340" y="430" width="160" height="60" rx="5" ry="5" fill="#ffb3b3" stroke="#5f2a2a" stroke-width="2" filter="url(#shadow)" />
+  <text x="420" y="455" font-family="Arial" font-size="12" fill="#5f2a2a" text-anchor="middle">Patch Azure SDK</text>
+  <text x="420" y="475" font-family="Arial" font-size="12" fill="#5f2a2a" text-anchor="middle">HTTP + Inference Clients</text>
+  <!-- connection-points
+    top: 420,430
+    right: 500,460
+  -->
+
+  <rect id="sdkspan" x="760" y="430" width="120" height="60" rx="5" ry="5" fill="#ffb3b3" stroke="#5f2a2a" stroke-width="2" filter="url(#shadow)" />
+  <text x="820" y="455" font-family="Arial" font-size="12" fill="#5f2a2a" text-anchor="middle">Create Spans</text>
+  <text x="820" y="475" font-family="Arial" font-size="12" fill="#5f2a2a" text-anchor="middle">for API Calls</text>
+  <!-- connection-points
+    top: 820,430
+    bottom: 820,490
+  -->
+
+  <rect id="content_spans" x="560" y="430" width="140" height="60" rx="5" ry="5" fill="#ffb3b3" stroke="#5f2a2a" stroke-width="2" filter="url(#shadow)" />
+  <text x="630" y="455" font-family="Arial" font-size="12" fill="#5f2a2a" text-anchor="middle">Add Content</text>
+  <text x="630" y="475" font-family="Arial" font-size="12" fill="#5f2a2a" text-anchor="middle">to Span Events</text>
+  <!-- connection-points
+    top: 630,430
+    right: 700,460
+  -->
+
+  <rect id="setup_export" x="1030" y="430" width="120" height="60" rx="5" ry="5" fill="#ff8080" stroke="#5f2a2a" stroke-width="2" filter="url(#shadow)" />
+  <text x="1090" y="455" font-family="Arial" font-size="12" fill="#5f2a2a" text-anchor="middle">Configure</text>
+  <text x="1090" y="475" font-family="Arial" font-size="12" fill="#5f2a2a" text-anchor="middle">Export Pipeline</text>
+  <!-- connection-points
+    top: 1090,430
+    bottom: 1090,490
+  -->
+
+  <!-- Swimlane 4: Azure Monitor -->
+  <rect id="export_spans" x="940" y="590" width="120" height="60" rx="5" ry="5" fill="#e6b3ff" stroke="#3a2a5f" stroke-width="2" filter="url(#shadow)" />
+  <text x="1000" y="615" font-family="Arial" font-size="12" fill="#3a2a5f" text-anchor="middle">Export Spans to</text>
+  <text x="1000" y="635" font-family="Arial" font-size="12" fill="#3a2a5f" text-anchor="middle">App Insights</text>
+  <!-- connection-points
+    top: 1000,590
+  -->
+
+  <rect id="view_traces" x="720" y="590" width="120" height="60" rx="5" ry="5" fill="#e6b3ff" stroke="#3a2a5f" stroke-width="2" filter="url(#shadow)" />
+  <text x="780" y="615" font-family="Arial" font-size="12" fill="#3a2a5f" text-anchor="middle">View Traces in</text>
+  <text x="780" y="635" font-family="Arial" font-size="12" fill="#3a2a5f" text-anchor="middle">AI Foundry UI</text>
+  <!-- connection-points
+    right: 840,620
+  -->
+
+  <!-- Connecting Lines -->
+  <!-- Load dotenv to enable_telemetry -->
+  <path d="M380,155 H480" stroke="#2a3f5f" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- enable_telemetry to instrumentor -->
+  <path d="M540,180 V270 H340 V300" stroke="#2a3f5f" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- instrumentor to env_var -->
+  <path d="M420,325 H460" stroke="#2a5f2a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- env_var to decision -->
+  <path d="M660,325 H710" stroke="#2a5f2a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- decision to configure_monitor -->
+  <path d="M810,325 H940" stroke="#2a5f2a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <text x="875" y="315" font-family="Arial" font-size="12" fill="#2a5f2a">Yes</text>
+
+  <!-- decision to enable_telemetry return -->
+  <path d="M760,350 V370 H660 V350" stroke="#2a5f2a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <text x="730" y="365" font-family="Arial" font-size="12" fill="#2a5f2a">No</text>
+
+  <!-- instrumentor to patches -->
+  <path d="M340,350 V430" stroke="#5f2a2a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- env_var to content_spans -->
+  <path d="M560,350 V430" stroke="#5f2a2a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- configure_monitor to setup_export -->
+  <path d="M1030,350 V430" stroke="#5f2a2a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- patches to content_spans -->
+  <path d="M500,460 H560" stroke="#5f2a2a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- content_spans to sdkspan -->
+  <path d="M700,460 H760" stroke="#5f2a2a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- enable_telemetry (end) to SDK calls -->
+  <path d="M660,160 H800" stroke="#2a3f5f" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- SDK calls to sdkspan -->
+  <path d="M860,180 V430" stroke="#5f2a2a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- sdkspan to export_spans -->
+  <path d="M820,490 V540 H1000 V590" stroke="#3a2a5f" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- setup_export to export_spans -->
+  <path d="M1090,490 V540 H1000 V590" stroke="#3a2a5f" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- export_spans to view_traces -->
+  <path d="M940,620 H840" stroke="#3a2a5f" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- Arrowhead marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2a3f5f" />
+    </marker>
+  </defs>
+</svg>

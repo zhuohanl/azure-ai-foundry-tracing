@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-05-03T12:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" etag="123456789" type="device">
+  <diagram id="azure-ai-foundry-tracing" name="Azure AI Foundry Tracing Flow">
+    <mxGraphModel dx="1422" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title Bar -->
+        <mxCell id="title-bar" value="Azure AI Foundry Tracing Flow" style="swimlane;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;horizontal=1;startSize=60;horizontalStack=0;fillColor=#2a3f5f;strokeColor=#2a3f5f;fontColor=#FFFFFF;fontSize=24;fontStyle=1;swimlaneFillColor=none;swimlaneLine=0;shadow=0;" parent="1" vertex="1">
+          <mxGeometry width="1200" height="700" as="geometry" />
+        </mxCell>
+        
+        <!-- Swimlane 1: User Code (run.py) -->
+        <mxCell id="lane-usercode" value="User Code (run.py)" style="swimlane;startSize=40;horizontal=0;fillColor=#e6f0ff;strokeColor=#000000;fontColor=#2a3f5f;fontSize=16;fontStyle=1" parent="title-bar" vertex="1">
+          <mxGeometry y="60" width="1200" height="160" as="geometry">
+            <mxRectangle y="60" width="1200" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Swimlane 2: Configuration (config.py) -->
+        <mxCell id="lane-config" value="Configuration (config.py)" style="swimlane;startSize=40;horizontal=0;fillColor=#e6ffe6;strokeColor=#000000;fontColor=#2a5f2a;fontSize=16;fontStyle=1" parent="title-bar" vertex="1">
+          <mxGeometry y="220" width="1200" height="160" as="geometry">
+            <mxRectangle y="220" width="1200" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Swimlane 3: Instrumentation Layer -->
+        <mxCell id="lane-instrumentation" value="Instrumentation Layer" style="swimlane;startSize=40;horizontal=0;fillColor=#ffe6e6;strokeColor=#000000;fontColor=#5f2a2a;fontSize=16;fontStyle=1" parent="title-bar" vertex="1">
+          <mxGeometry y="380" width="1200" height="160" as="geometry">
+            <mxRectangle y="380" width="1200" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Swimlane 4: Azure Monitor -->
+        <mxCell id="lane-monitor" value="Azure Monitor" style="swimlane;startSize=40;horizontal=0;fillColor=#f0e6ff;strokeColor=#000000;fontColor=#3a2a5f;fontSize=16;fontStyle=1" parent="title-bar" vertex="1">
+          <mxGeometry y="540" width="1200" height="160" as="geometry">
+            <mxRectangle y="540" width="1200" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- User Code Elements -->
+        <mxCell id="load-dotenv" value="load_dotenv()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b3d1ff;strokeColor=#3a506b;strokeWidth=2;shadow=1;fontColor=#2a3f5f;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="260" y="130" width="120" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="enable-telemetry" value="enable_telemetry&#xa;(True)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b3d1ff;strokeColor=#3a506b;strokeWidth=2;shadow=1;fontColor=#2a3f5f;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="480" y="130" width="120" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="sdk-calls" value="SDK Calls&#xa;chat_with_llm()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#80b3ff;strokeColor=#3a506b;strokeWidth=2;shadow=1;fontColor=#2a3f5f;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="800" y="130" width="120" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Configuration Elements -->
+        <mxCell id="instrumentor" value="AIInferenceInstrumentor()&#xa;.instrument()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b3ffb3;strokeColor=#2a5f2a;strokeWidth=2;shadow=1;fontColor=#2a5f2a;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="260" y="300" width="160" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="env-var" value="Set AZURE_TRACING_GEN_AI_&#xa;CONTENT_RECORDING_ENABLED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b3ffb3;strokeColor=#2a5f2a;strokeWidth=2;shadow=1;fontColor=#2a5f2a;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="460" y="300" width="200" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="decision" value="App Insights?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#99ff99;strokeColor=#2a5f2a;strokeWidth=2;shadow=1;fontColor=#2a5f2a;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="710" y="300" width="100" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="configure-monitor" value="configure_azure_monitor&#xa;(connection_string)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#80ff80;strokeColor=#2a5f2a;strokeWidth=2;shadow=1;fontColor=#2a5f2a;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="940" y="300" width="180" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Instrumentation Elements -->
+        <mxCell id="patches" value="Patch Azure SDK&#xa;HTTP + Inference Clients" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffb3b3;strokeColor=#5f2a2a;strokeWidth=2;shadow=1;fontColor=#5f2a2a;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="340" y="430" width="160" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="content-spans" value="Add Content&#xa;to Span Events" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffb3b3;strokeColor=#5f2a2a;strokeWidth=2;shadow=1;fontColor=#5f2a2a;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="560" y="430" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="sdkspan" value="Create Spans&#xa;for API Calls" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffb3b3;strokeColor=#5f2a2a;strokeWidth=2;shadow=1;fontColor=#5f2a2a;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="760" y="430" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="setup-export" value="Configure&#xa;Export Pipeline" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ff8080;strokeColor=#5f2a2a;strokeWidth=2;shadow=1;fontColor=#5f2a2a;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="430" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Azure Monitor Elements -->
+        <mxCell id="export-spans" value="Export Spans to&#xa;App Insights" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6b3ff;strokeColor=#3a2a5f;strokeWidth=2;shadow=1;fontColor=#3a2a5f;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="940" y="590" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="view-traces" value="View Traces in&#xa;AI Foundry UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6b3ff;strokeColor=#3a2a5f;strokeWidth=2;shadow=1;fontColor=#3a2a5f;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="720" y="590" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Connections -->
+        <!-- Load dotenv to enable_telemetry -->
+        <mxCell id="conn-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#2a3f5f;" edge="1" parent="1" source="load-dotenv" target="enable-telemetry">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- enable_telemetry to instrumentor -->
+        <mxCell id="conn-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#2a3f5f;" edge="1" parent="1" source="enable-telemetry" target="instrumentor">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="540" y="270" />
+              <mxPoint x="340" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- instrumentor to env_var -->
+        <mxCell id="conn-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#2a5f2a;" edge="1" parent="1" source="instrumentor" target="env-var">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- env_var to decision -->
+        <mxCell id="conn-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#2a5f2a;" edge="1" parent="1" source="env-var" target="decision">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- decision to configure_monitor (Yes) -->
+        <mxCell id="conn-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#2a5f2a;" edge="1" parent="1" source="decision" target="configure-monitor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yes-label" value="Yes" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=12;fontColor=#2a5f2a;" vertex="1" parent="1">
+          <mxGeometry x="875" y="305" width="40" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- decision to enable_telemetry return (No) -->
+        <mxCell id="conn-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#2a5f2a;" edge="1" parent="1" source="decision" target="env-var">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="370" />
+              <mxPoint x="560" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="no-label" value="No" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=12;fontColor=#2a5f2a;" vertex="1" parent="1">
+          <mxGeometry x="730" y="355" width="40" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- instrumentor to patches -->
+        <mxCell id="conn-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#5f2a2a;" edge="1" parent="1" source="instrumentor" target="patches">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="400" />
+              <mxPoint x="420" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- env_var to content_spans -->
+        <mxCell id="conn-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#5f2a2a;" edge="1" parent="1" source="env-var" target="content-spans">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- configure_monitor to setup_export -->
+        <mxCell id="conn-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#5f2a2a;" edge="1" parent="1" source="configure-monitor" target="setup-export">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- patches to content_spans -->
+        <mxCell id="conn-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#5f2a2a;" edge="1" parent="1" source="patches" target="content-spans">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- content_spans to sdkspan -->
+        <mxCell id="conn-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#5f2a2a;" edge="1" parent="1" source="content-spans" target="sdkspan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- enable_telemetry (end) to SDK calls -->
+        <mxCell id="conn-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#2a3f5f;" edge="1" parent="1" target="sdk-calls">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="155" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- SDK calls to sdkspan -->
+        <mxCell id="conn-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#5f2a2a;" edge="1" parent="1" source="sdk-calls" target="sdkspan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- sdkspan to export_spans -->
+        <mxCell id="conn-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#3a2a5f;" edge="1" parent="1" source="sdkspan" target="export-spans">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="540" />
+              <mxPoint x="1000" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- setup_export to export_spans -->
+        <mxCell id="conn-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#3a2a5f;" edge="1" parent="1" source="setup-export" target="export-spans">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- export_spans to view_traces -->
+        <mxCell id="conn-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#3a2a5f;" edge="1" parent="1" source="export-spans" target="view-traces">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
