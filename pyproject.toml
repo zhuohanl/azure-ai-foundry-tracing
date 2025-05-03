@@ -1,0 +1,26 @@
+[project]
+name = "azure-ai-foundry-tracing"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Your Name",email = "you@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11,<4"
+dependencies = [
+    "opentelemetry-sdk",
+    "azure-ai-projects",
+    "openai",
+    "opentelemetry-instrumentation-openai-v2",
+    "azure-identity",
+    "python-dotenv",
+    "azure-ai-inference[prompts] (>=1.0.0b9,<2.0.0)",
+    "azure-monitor-opentelemetry",
+    "opentelemetry-instrumentation-langchain (>=0.40.2,<0.41.0)",
+    "opentelemetry-api (>=1.32.1,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
